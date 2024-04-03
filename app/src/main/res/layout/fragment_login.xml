@@ -4,23 +4,55 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/log_in"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintBottom_toTopOf="@id/lly_actions"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/default_padding">
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/authentication_arg_username"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/authentication_arg_password"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_actions"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/authentication_action_log_in"/>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/authentication_action_go_to_register"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

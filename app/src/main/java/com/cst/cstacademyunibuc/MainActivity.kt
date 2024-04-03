@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-
-fun String.logErrorMessage() {
-    Log.e("MyApp", this)
-}
+import com.cst.cstacademyunibuc.helpers.extensions.logErrorMessage
 
 class MainActivity : AppCompatActivity() {
 
