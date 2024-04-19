@@ -14,9 +14,7 @@ sealed class CartItemModel(
     open val type: CartItemType
 )
 
-@Entity("product_model")
 data class ProductModel(
-    @PrimaryKey
     override val id: String,
     override val title: String,
     val description: String
@@ -26,9 +24,7 @@ data class ProductModel(
     type = CartItemType.PRODUCT
 )
 
-@Entity("category_model")
 data class CategoryModel(
-    @PrimaryKey(autoGenerate = true)
     override val id: String = "",
     override val title: String,
     val description: String

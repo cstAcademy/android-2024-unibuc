@@ -2,14 +2,24 @@ package com.cst.cstacademyunibuc.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.cst.cstacademyunibuc.data.dao.ProductsDao
-import com.cst.cstacademyunibuc.models.CategoryModel
-import com.cst.cstacademyunibuc.models.ProductModel
+import com.cst.cstacademyunibuc.data.dao.UserDao
+import com.cst.cstacademyunibuc.models.api.ProductAPIModel
+import com.cst.cstacademyunibuc.models.user.RoleModel
+import com.cst.cstacademyunibuc.models.user.UserModel
 
 @Database(
-    entities = [ ProductModel::class, CategoryModel::class],
+    entities = [
+        ProductAPIModel::class,
+        UserModel::class,
+        RoleModel::class
+    ],
     version = 1
 )
-abstract class AppDatabase: RoomDatabase() {
+@TypeConverters(RoomConverters::class)
+abstract class AppDatabase : RoomDatabase() {
     abstract val productsDao: ProductsDao
+    abstract val userDao: UserDao
 }

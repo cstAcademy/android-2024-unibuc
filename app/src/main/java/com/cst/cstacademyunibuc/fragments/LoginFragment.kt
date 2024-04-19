@@ -11,8 +11,13 @@ import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.StringRequest
 import com.cst.cstacademyunibuc.BuildConfig
 import com.cst.cstacademyunibuc.R
+import com.cst.cstacademyunibuc.data.tasks.GetUsersWithRoleTask
+import com.cst.cstacademyunibuc.data.tasks.InsertUserTask
 import com.cst.cstacademyunibuc.helpers.VolleyRequestQueue
 import com.cst.cstacademyunibuc.helpers.extensions.logErrorMessage
+import com.cst.cstacademyunibuc.models.user.RoleType
+import com.cst.cstacademyunibuc.models.user.UserModel
+import java.util.UUID
 
 class LoginFragment : Fragment() {
 
@@ -31,7 +36,9 @@ class LoginFragment : Fragment() {
         }
 
         val doLoginBtn = view.findViewById<Button>(R.id.btn_login)
-        doLoginBtn.setOnClickListener { doLogin() }
+        doLoginBtn.setOnClickListener {
+            doLogin()
+        }
     }
 
 
