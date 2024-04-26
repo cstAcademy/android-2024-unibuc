@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.StringRequest
@@ -35,7 +36,7 @@ class LoginFragment : Fragment() {
             goToRegister()
         }
 
-        val doLoginBtn = view.findViewById<Button>(R.id.btn_login)
+        val doLoginBtn = view.findViewById<TextView>(R.id.btn_login)
         doLoginBtn.setOnClickListener {
             doLogin()
         }
