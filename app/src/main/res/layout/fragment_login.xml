@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/lly_actions"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,22 +36,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_padding_half" />
+
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_username"
             style="@style/FormInputEditText.AuthUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_padding" />
+
         <TextView
             style="@style/FormSectionTitleTextView.AuthPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_padding_half" />
 
         <EditText
             android:id="@+id/et_password"
             style="@style/FormInputEditText.AuthPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_padding_half" />
 
         <TextView
             style="@style/FormActionTextView.AuthForgotPassword"
@@ -65,9 +81,13 @@
         android:id="@+id/lly_actions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:divider="@drawable/shape_divider_vertical_default_space"
         android:gravity="center"
         android:orientation="vertical"
+        android:showDividers="middle"
+        app:layout_constraintVertical_bias="0.85"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ly_form_data"
         app:layout_constraintEnd_toEndOf="@id/ly_form_data"
         app:layout_constraintStart_toStartOf="@id/ly_form_data">
 
@@ -79,11 +99,27 @@
             android:clickable="true"
             android:focusable="true" />
 
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/authentication_action_go_to_register" />
+            android:gravity="center"
+            android:divider="@drawable/shape_divider_horizontal_default_space"
+            android:showDividers="middle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/FormHintTextView.AuthHintNoAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_register"
+                style="@style/ActionSecondButton.AuthSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/authentication_action_go_to_register" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,5 +28,13 @@
         <item name="android:gravity">end</item>
     </style>
 
+    <style name="FormHintTextView" parent="AppTextView">
+        <item name="android:textColor">@color/jumbo</item>
+        <item name="android:textSize">@dimen/material_text_subhead</item>
+    </style>
+
+    <style name="FormHintTextView.AuthHintNoAccount">
+        <item name="android:text">@string/authentication_hint_no_account</item>
+    </style>
 
 </resources>
