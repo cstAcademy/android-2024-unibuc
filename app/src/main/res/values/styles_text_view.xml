@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTextView">
+
+    </style>
+
+    <style name="FormSectionTitleTextView" parent="AppTextView">
+        <item name="android:textColor">@color/french_gray</item>
+        <item name="android:textSize">@dimen/material_text_body1</item>
+    </style>
+
+    <style name="FormSectionTitleTextView.AuthUsername">
+        <item name="android:text">@string/authentication_arg_username</item>
+    </style>
+
+    <style name="FormSectionTitleTextView.AuthPassword">
+        <item name="android:text">@string/authentication_arg_password</item>
+    </style>
+
+    <style name="FormActionTextView" parent="AppTextView">
+        <item name="android:textColor">@color/selector_action_text</item>
+        <item name="android:textSize">@dimen/material_text_subhead</item>
+    </style>
+
+    <style name="FormActionTextView.AuthForgotPassword">
+        <item name="android:text">@string/authentication_action_forgot_password</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+
+</resources>
