@@ -1,125 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:background="@color/shark">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@id/ly_form_data"
-        app:layout_constraintDimensionRatio="H, 248:35"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintWidth_percent="0.5" />
+    <data>
 
-    <LinearLayout
-        android:id="@+id/ly_form_data"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.8">
+        <variable
+            name="listener"
+            type="com.cst.cstacademyunibuc.fragments.login.LoginFragmentListener" />
 
-        <TextView
-            style="@style/FormSectionTitleTextView.AuthUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <variable
+            name="viewModel"
+            type="com.cst.cstacademyunibuc.fragments.login.LoginFragmentViewModel" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_padding_half" />
+        <import type="android.view.View" />
+    </data>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_username"
-            style="@style/FormInputEditText.AuthUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/shark">
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_padding" />
-
-        <TextView
-            style="@style/FormSectionTitleTextView.AuthPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_padding_half" />
-
-        <EditText
-            android:id="@+id/et_password"
-            style="@style/FormInputEditText.AuthPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_padding_half" />
-
-        <TextView
-            style="@style/FormActionTextView.AuthForgotPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lly_actions"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/shape_divider_vertical_default_space"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        app:layout_constraintVertical_bias="0.85"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ly_form_data"
-        app:layout_constraintEnd_toEndOf="@id/ly_form_data"
-        app:layout_constraintStart_toStartOf="@id/ly_form_data">
-
-        <TextView
-            android:id="@+id/btn_login"
-            style="@style/ActionButton.AuthLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/ly_form_data"
+            app:layout_constraintDimensionRatio="H, 248:35"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25"
+            app:layout_constraintWidth_percent="0.8"
+            app:url="@{viewModel.logoUrl}"
+            tools:src="@drawable/logo" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ly_form_data"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:divider="@drawable/shape_divider_horizontal_default_space"
-            android:showDividers="middle"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.8">
 
             <TextView
-                style="@style/FormHintTextView.AuthHintNoAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/FormSectionTitleTextView.AuthUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btn_register"
-                style="@style/ActionSecondButton.AuthSignUp"
+            <Space
                 android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_padding_half" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_username"
+                style="@style/FormInputEditText.AuthUsername"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/authentication_action_go_to_register" />
+                android:text="@={viewModel.username}" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_padding_half" />
+
+            <TextView
+                style="@style/FormInputErrorTitleTextView.AuthUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.isUsernameError ? View.VISIBLE : View.GONE, default=gone}"
+                tools:visibility="visible" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_padding" />
+
+            <TextView
+                style="@style/FormSectionTitleTextView.AuthPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_padding_half" />
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/FormInputEditText.AuthPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.password}" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_padding_half" />
+
+            <TextView
+                style="@style/FormActionTextView.AuthForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> listener.goToForgotPassword()}" />
         </LinearLayout>
-    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/lly_actions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/shape_divider_vertical_default_space"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/ly_form_data"
+            app:layout_constraintStart_toStartOf="@id/ly_form_data"
+            app:layout_constraintTop_toBottomOf="@id/ly_form_data"
+            app:layout_constraintVertical_bias="0.85">
+
+            <TextView
+                android:id="@+id/btn_login"
+                style="@style/ActionButton.AuthLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> viewModel.generateLoginModel()}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/shape_divider_horizontal_default_space"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    style="@style/FormHintTextView.AuthHintNoAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btn_register"
+                    style="@style/ActionSecondButton.AuthSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> listener.goToRegister()}"
+                    android:text="@string/authentication_action_go_to_register" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

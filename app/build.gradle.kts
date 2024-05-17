@@ -41,6 +41,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        dataBinding = true
     }
 
     kapt {
@@ -60,6 +61,8 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
 
     implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     implementation("androidx.room:room-runtime:$room_version")
 //    annotationProcessor("androidx.room:room-compiler:$room_version")

@@ -1,67 +1,60 @@
-package com.cst.cstacademyunibuc.fragments
+package com.cst.cstacademyunibuc.fragments.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.StringRequest
 import com.cst.cstacademyunibuc.BuildConfig
 import com.cst.cstacademyunibuc.R
-import com.cst.cstacademyunibuc.data.tasks.GetUsersWithRoleTask
-import com.cst.cstacademyunibuc.data.tasks.InsertUserTask
+import com.cst.cstacademyunibuc.databinding.FragmentLoginBinding
 import com.cst.cstacademyunibuc.helpers.VolleyRequestQueue
 import com.cst.cstacademyunibuc.helpers.extensions.logErrorMessage
-import com.cst.cstacademyunibuc.models.user.RoleType
-import com.cst.cstacademyunibuc.models.user.UserModel
-import java.util.UUID
+import com.cst.cstacademyunibuc.models.LoginModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginFragmentListener {
+
+    private lateinit var binding: FragmentLoginBinding
+    private val viewModel: LoginFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_login, container, false)
+
+        binding.listener = this
+        binding.viewModel = viewModel
+
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val goToRegisterBtn = view.findViewById<Button>(R.id.btn_register)
-        goToRegisterBtn.setOnClickListener {
-            goToRegister()
+        if(BuildConfig.DEBUG) {
+            //viewModel.username.value = "mor_2314"
+            viewModel.password.set("83r5^_")
         }
 
-        val doLoginBtn = view.findViewById<TextView>(R.id.btn_login)
-        doLoginBtn.setOnClickListener {
-            doLogin()
+        setupObservers()
+    }
+
+    private fun setupObservers() {
+        viewModel.loginModel.observe(viewLifecycleOwner) { loginModel ->
+            doLogin(loginModel)
         }
     }
 
-
-    private fun doLogin() {
-        val edtUsername = view?.findViewById<EditText>(R.id.et_username) ?: return
-        val edtPassword = view?.findViewById<EditText>(R.id.et_password) ?: return
-
-        val username: String
-        val password: String
-
-        when (BuildConfig.DEBUG) {
-            true -> {
-                username = "mor_2314"
-                password = "83r5^_"
-            }
-
-            false -> {
-                username = edtUsername.text.toString().trim()
-                password = edtPassword.text.toString().trim()
-            }
-        }
-
+    private fun doLogin(loginModel: LoginModel) {
         val url = "${BuildConfig.BASE_URL}auth/login"
 
         val stringRequest = object : StringRequest(
@@ -78,8 +71,8 @@ class LoginFragment : Fragment() {
         ) {
             override fun getParams(): MutableMap<String, String> {
                 val params: MutableMap<String, String> = HashMap()
-                params["username"] = username
-                params["password"] = password
+                params["username"] = loginModel.username
+                params["password"] = loginModel.password
                 return params
             }
         }
@@ -89,7 +82,11 @@ class LoginFragment : Fragment() {
         VolleyRequestQueue.addToRequestQueue(stringRequest)
     }
 
-    private fun goToRegister() =
+    override fun goToForgotPassword() {
+        //
+    }
+
+    override fun goToRegister() =
         findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToRegisterFragment())
 
     private fun goToProducts() =
@@ -100,4 +97,9 @@ class LoginFragment : Fragment() {
 
         VolleyRequestQueue.requestQueue.cancelAll("SRTAG")
     }
+}
+
+interface LoginFragmentListener {
+    fun goToForgotPassword()
+    fun goToRegister()
 }
