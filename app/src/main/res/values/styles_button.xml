@@ -18,6 +18,10 @@
         <item name="android:text">@string/authentication_action_log_in</item>
     </style>
 
+    <style name="ActionButton.AuthLogOut">
+        <item name="android:text">@string/authentication_action_log_out</item>
+    </style>
+
     <style name="ActionSecondButton" parent="AppButton">
         <item name="android:background">@drawable/shape_action_second_button_default</item>
         <item name="android:textColor">@color/selector_action_second_button_text</item>

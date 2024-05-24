@@ -10,6 +10,7 @@
     <string name="authentication_hint_password">password</string>
     <string name="authentication_action_forgot_password"><u>Forgot password?</u></string>
     <string name="authentication_action_log_in">Log In</string>
+    <string name="authentication_action_log_out">Log Out</string>
     <string name="authentication_action_go_to_register">Sign up</string>
     <string name="authentication_hint_no_account">Don\'t have an account?</string>
     <string name="authentication_input_error_username">Username invalid</string>

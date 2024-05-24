@@ -15,7 +15,10 @@ import com.cst.cstacademyunibuc.R
 import com.cst.cstacademyunibuc.databinding.FragmentLoginBinding
 import com.cst.cstacademyunibuc.helpers.VolleyRequestQueue
 import com.cst.cstacademyunibuc.helpers.extensions.logErrorMessage
+import com.cst.cstacademyunibuc.managers.SharedPrefsManager
 import com.cst.cstacademyunibuc.models.LoginModel
+import com.cst.cstacademyunibuc.models.api.LoginAPIResponseModel
+import com.google.gson.Gson
 
 class LoginFragment : Fragment(), LoginFragmentListener {
 
@@ -41,7 +44,7 @@ class LoginFragment : Fragment(), LoginFragmentListener {
         super.onViewCreated(view, savedInstanceState)
 
         if(BuildConfig.DEBUG) {
-            //viewModel.username.value = "mor_2314"
+            viewModel.username.value = "mor_2314"
             viewModel.password.set("83r5^_")
         }
 
@@ -54,6 +57,11 @@ class LoginFragment : Fragment(), LoginFragmentListener {
         }
     }
 
+    private fun handleLoginResponse(response: LoginAPIResponseModel) {
+        SharedPrefsManager.writeToken(response.token)
+        goToProducts()
+    }
+
     private fun doLogin(loginModel: LoginModel) {
         val url = "${BuildConfig.BASE_URL}auth/login"
 
@@ -62,8 +70,8 @@ class LoginFragment : Fragment(), LoginFragmentListener {
             url,
             { response ->
                 "success".logErrorMessage()
-
-                goToProducts()
+                val apiResponse = Gson().fromJson(response, LoginAPIResponseModel::class.java)
+                handleLoginResponse(apiResponse)
             },
             {
                 "That didn't work!".logErrorMessage()
