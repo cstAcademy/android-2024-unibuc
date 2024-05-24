@@ -3,26 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_login">
-
-    <fragment
-        android:id="@+id/fragment_login"
-        android:name="com.cst.cstacademyunibuc.fragments.login.LoginFragment"
-        android:label="Login Fragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_fragment_login_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_fragment_login_to_productListFragment"
-            app:destination="@id/productListFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.cst.cstacademyunibuc.fragments.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+    app:startDestination="@id/productListFragment">
 
     <fragment
         android:id="@+id/productListFragment"

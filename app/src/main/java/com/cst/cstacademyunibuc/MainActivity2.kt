@@ -1,5 +1,6 @@
 package com.cst.cstacademyunibuc
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen
@@ -37,7 +38,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun navigateToProducts() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.productListFragment)
+        findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph)
     }
 
     private fun setupSplashScreen() {
@@ -50,5 +51,14 @@ class MainActivity2 : AppCompatActivity() {
                 sp.remove() // Remove splash screen
             }
         }
+    }
+
+    fun logout() {
+        SharedPrefsManager.removeToken()
+
+//        findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph_authentication)
+
+        startActivity(Intent(this, MainActivity2::class.java))
+        finish()
     }
 }

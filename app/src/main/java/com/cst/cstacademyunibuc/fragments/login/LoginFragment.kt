@@ -98,7 +98,7 @@ class LoginFragment : Fragment(), LoginFragmentListener {
         findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToRegisterFragment())
 
     private fun goToProducts() =
-        findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToProductListFragment())
+        findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToNavGraph())
 
     override fun onStop() {
         super.onStop()

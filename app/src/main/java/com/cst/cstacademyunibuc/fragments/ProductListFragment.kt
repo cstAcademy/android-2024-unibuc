@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.cst.cstacademyunibuc.BuildConfig
+import com.cst.cstacademyunibuc.MainActivity2
 import com.cst.cstacademyunibuc.R
 import com.cst.cstacademyunibuc.adapters.CartItemListAdapter
 import com.cst.cstacademyunibuc.data.ProductsRepository
@@ -41,8 +42,9 @@ class ProductListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.btn_log_out).setOnClickListener {
-            SharedPrefsManager.removeToken()
-            findNavController().popBackStack()
+            (activity as? MainActivity2)?.apply {
+                this.logout()
+            }
         }
 
         setupRecyclerView()
