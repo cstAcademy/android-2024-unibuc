@@ -25,8 +25,15 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.cst.cstacademyunibuc.fragments.RegisterFragment"
+        android:name="com.cst.cstacademyunibuc.fragments.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_nav_graph"
+            app:destination="@id/nav_graph"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph_authentication"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

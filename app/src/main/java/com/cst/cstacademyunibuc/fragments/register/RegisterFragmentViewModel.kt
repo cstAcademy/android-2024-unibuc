@@ -1,16 +1,12 @@
-package com.cst.cstacademyunibuc.fragments.login
+package com.cst.cstacademyunibuc.fragments.register
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.android.volley.BuildConfig
 import com.cst.cstacademyunibuc.data.repositories.users.UserRepository
-import com.cst.cstacademyunibuc.helpers.SingleLiveEvent
-import com.cst.cstacademyunibuc.models.LoginModel
 import com.cst.cstacademyunibuc.models.user.RoleType
 import com.cst.cstacademyunibuc.models.user.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,11 +15,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginFragmentViewModel @Inject constructor(
+class RegisterFragmentViewModel @Inject constructor(
     val userRepository: UserRepository
 ) : ViewModel() {
 
-    val logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/1200px-Google_Images_2015_logo.svg.png"
+    val logoUrl =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/1200px-Google_Images_2015_logo.svg.png"
 
     val username = MutableLiveData<String>()
     val password = ObservableField<String>()
@@ -33,21 +30,24 @@ class LoginFragmentViewModel @Inject constructor(
         MutableLiveData(isUsernameValid)
     }
 
-    val loginModel = SingleLiveEvent<LoginModel>()
+    val userModel = MutableLiveData<UserModel>()
 
-    fun generateLoginModel() {
+    fun registerUser() {
         val username = this.username.value ?: ""
         val password = this.password.get() ?: ""
 
-        loginModel.value = LoginModel(username, password)
-    }
+        val user = UserModel(
+            username = username,
+            password = password,
+            role = RoleType.USER_PLEB
+        )
 
-    fun saveLoginUser(loginModel: LoginModel) = viewModelScope.launch(Dispatchers.IO) {
-        userRepository.insertUserWithRole(UserModel(
-            username = loginModel.username,
-            password = loginModel.password,
-            role = RoleType.ADMIN
-        ))
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.insertUserWithRole(user)
 
+            viewModelScope.launch(Dispatchers.Main) {
+                this@RegisterFragmentViewModel.userModel.value = user
+            }
+        }
+    }
 }

@@ -18,6 +18,10 @@
         <item name="android:text">@string/authentication_action_log_in</item>
     </style>
 
+    <style name="ActionButton.AuthRegister">
+        <item name="android:text">@string/authentication_action_register</item>
+    </style>
+
     <style name="ActionButton.AuthLogOut">
         <item name="android:text">@string/authentication_action_log_out</item>
     </style>

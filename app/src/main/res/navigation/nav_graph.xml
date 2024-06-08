@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.cst.cstacademyunibuc.fragments.ProductListFragment"
+        android:name="com.cst.cstacademyunibuc.fragments.productList.ProductListFragment"
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" />
 

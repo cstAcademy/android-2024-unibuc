@@ -16,10 +16,15 @@ import com.cst.cstacademyunibuc.models.user.UserModel
         UserModel::class,
         RoleModel::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(RoomConverters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract val productsDao: ProductsDao
-    abstract val userDao: UserDao
+    abstract fun getProductsDao(): ProductsDao
+    abstract fun getUserDao(): UserDao
+
+    companion object {
+        const val DATABASE_NAME = "CST_FMI"
+    }
 }

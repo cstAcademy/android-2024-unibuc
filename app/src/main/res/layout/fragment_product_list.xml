@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ProductListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_products"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="@dimen/default_padding"
-        android:clipToPadding="false"
-        android:layout_marginBottom="@dimen/default_margin"
-        app:layout_constraintBottom_toTopOf="@id/btn_log_out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <Button
-        style="@style/ActionButton.AuthLogOut"
-        android:id="@+id/btn_log_out"
-        android:layout_width="0dp"
-        android:layout_marginBottom="@dimen/default_margin"
-        app:layout_constraintWidth_percent="0.8"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <variable
+            name="viewModel"
+            type="com.cst.cstacademyunibuc.fragments.productList.ProductListFragmentViewModel" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="listener"
+            type="com.cst.cstacademyunibuc.fragments.productList.ProductListFragmentListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.productList.ProductListFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adapter="@{viewModel.adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:padding="@dimen/default_padding"
+            android:clipToPadding="false"
+            android:layout_marginBottom="@dimen/default_margin"
+            app:layout_constraintBottom_toTopOf="@id/btn_log_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            style="@style/ActionButton.AuthLogOut"
+            android:id="@+id/btn_log_out"
+            android:layout_width="0dp"
+            android:onClick="@{() -> listener.logOut()}"
+            android:layout_marginBottom="@dimen/default_margin"
+            app:layout_constraintWidth_percent="0.8"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

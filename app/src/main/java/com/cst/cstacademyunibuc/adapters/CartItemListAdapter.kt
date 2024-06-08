@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cst.cstacademyunibuc.R
 import com.cst.cstacademyunibuc.helpers.extensions.logErrorMessage
@@ -13,8 +14,14 @@ import com.cst.cstacademyunibuc.models.CategoryModel
 import com.cst.cstacademyunibuc.models.ProductModel
 
 class CartItemListAdapter(
-    private val list: List<CartItemModel>
+    private var list: List<CartItemModel>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    fun updateList(newList: List<CartItemModel>) {
+        val diffUtil = DiffUtil.calculateDiff(CartItemsDiffCallback(list, newList))
+        list = newList
+        diffUtil.dispatchUpdatesTo(this)
+    }
 
     override fun getItemCount() = list.size
 
@@ -79,5 +86,19 @@ class CartItemListAdapter(
             titleTextView.text = product.title
             descriptionTextView.text = product.description
         }
+    }
+
+    inner class CartItemsDiffCallback(
+        private val oldList: List<CartItemModel>,
+        private val newList: List<CartItemModel>
+    ): DiffUtil.Callback() {
+        override fun getOldListSize() = oldList.size
+        override fun getNewListSize() = newList.size
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
+
     }
 }

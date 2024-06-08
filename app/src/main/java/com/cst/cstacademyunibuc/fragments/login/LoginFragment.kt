@@ -19,7 +19,9 @@ import com.cst.cstacademyunibuc.managers.SharedPrefsManager
 import com.cst.cstacademyunibuc.models.LoginModel
 import com.cst.cstacademyunibuc.models.api.LoginAPIResponseModel
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(), LoginFragmentListener {
 
     private lateinit var binding: FragmentLoginBinding
@@ -70,6 +72,8 @@ class LoginFragment : Fragment(), LoginFragmentListener {
             url,
             { response ->
                 "success".logErrorMessage()
+                viewModel.saveLoginUser(loginModel) // not a good practice
+
                 val apiResponse = Gson().fromJson(response, LoginAPIResponseModel::class.java)
                 handleLoginResponse(apiResponse)
             },
